@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function CurrentApi() {
-  return (
-    <>
-      <h1>this is CurrentApi</h1>
-    </>
-  );
+  const [yes, setYes] = 'hii';
+
+  return <></>;
 }

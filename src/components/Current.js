@@ -1,20 +1,23 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import CurrentApi from './API/CurrentApi';
+import Hourly from './Hourly';
 import Navbar from './Navbar';
 
 export default function Current() {
   const [currData, setCurrData] = useState(true);
   const [longitude, setLongitude] = useState();
   const [latitude, setLatitude] = useState();
-  /const [height, setHeight] = useState(0);
+  const [height, setHeight] = useState(0);
   const info_cnt = useRef(null);
+  const [hourly, setHourly] = useState();
+  const [weekly, setWeekly] = useState();
 
   const API_KEY = '9fea503e8177fd247f33fbb6357119d3';
 
   const url = `        https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&units=metric&appid=${API_KEY}`;
 
-  /*useEffect(() => {
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition((x) => {
       setLongitude(x.coords.longitude);
       setLatitude(x.coords.latitude);
@@ -24,28 +27,23 @@ export default function Current() {
       .get(url)
       .then((res) => {
         setCurrData(res.data.current);
+        setHourly(res.data.hourly);
+        setWeekly(res.data.weekly);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [latitude, longitude]);*/
+  }, [latitude, longitude]);
 
-  console.log(currData);
+  //console.log(currData);
+  //console.log(hourly);
 
-  useEffect(() => {
-    const height = info_cnt.current.offsetHeight;
-
-    handleClick(height);
-  }, []);
-  console.log(height);
-
-  function handleClick(x) {
-    if (x === 78) {
-      info_cnt.style.height = '210px';
-    } else {
-      info_cnt.style.height = '78px';
-    }
+  /*function map() {
+    hourly.map((x) => {
+      console.log(x.temp);
+    });
   }
+  map();*/
 
   return (
     <>
@@ -66,7 +64,7 @@ export default function Current() {
                 />
               </div>
             </div>
-            <div className="info-cnt" onClick={handleClick} ref={info_cnt}>
+            <div className="info-cnt" ref={info_cnt}>
               <div className="info">
                 <div className="icon">icon</div>
                 <div className="value">{/*currData.humidity*/}</div>
@@ -85,6 +83,23 @@ export default function Current() {
               </div>
             </div>
           </div>
+          <div className='hourly-cnt'>
+          {hourly ? (
+            <>
+              {hourly.map((x, idx) => {
+                return (
+                  <>
+                    <Hourly value={x} key={idx} />
+                  </>
+                );
+              })}
+            </>
+          ) : (
+            <div className="loading-cnt">
+              <div className="loading">loading....</div>
+            </div>
+          )}
+          
         </>
       ) : (
         <div className="loading-cnt">

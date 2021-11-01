@@ -87,7 +87,7 @@ body {
   text-align: center;
   grid-row-gap: 1rem;
   grid-column-gap: 1rem;
-  paddig: 1.5rem;
+  padding: 1.5rem;
   margin: 1rem;
   width: 50%;
   height: 150px;
@@ -111,6 +111,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row;
   width: 100%;
   height: max-content;
   padding: 1rem;

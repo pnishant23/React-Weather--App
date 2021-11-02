@@ -4,6 +4,7 @@ import CurrentApi from './API/CurrentApi';
 import Daily from './Daily';
 import Hourly from './Hourly';
 import Navbar from './Navbar';
+import SevenDays from './SevenDays';
 
 export default function Current() {
   const [currData, setCurrData] = useState(true);
@@ -117,7 +118,7 @@ export default function Current() {
                 {weekly
                   .filter((value, idx) => idx < 3)
                   .map((i, idx) => {
-                    return <Daily item={i} key={idx} />;
+                    return <Daily item={i} daily={weekly} key={idx} />;
                   })}
               </>
             ) : (

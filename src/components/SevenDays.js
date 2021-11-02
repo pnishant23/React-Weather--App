@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from './Navbar';
 
-export default function SevenDays({daily}) {
+export default function SevenDays({ s }) {
+  console.log(s);
   return (
     <>
       <Navbar />

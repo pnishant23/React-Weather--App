@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import CurrentApi from './API/CurrentApi';
+import Daily from './Daily';
 import Hourly from './Hourly';
 import Navbar from './Navbar';
 
@@ -28,7 +29,7 @@ export default function Current() {
       .then((res) => {
         setCurrData(res.data.current);
         setHourly(res.data.hourly);
-        setWeekly(res.data.weekly);
+        setWeekly(res.data.daily);
       })
       .catch((err) => {
         console.log(err);
@@ -44,6 +45,8 @@ export default function Current() {
     });
   }
   map();*/
+
+  console.log(weekly);
 
   return (
     <>
@@ -83,23 +86,46 @@ export default function Current() {
               </div>
             </div>
           </div>
-          <div className='hourly-cnt'>
-          {hourly ? (
-            <>
-              {hourly.map((x, idx) => {
-                return (
-                  <>
-                    <Hourly value={x} key={idx} />
-                  </>
-                );
-              })}
-            </>
-          ) : (
-            <div className="loading-cnt">
-              <div className="loading">loading....</div>
+          <div className="hourly-cnt">
+            {hourly ? (
+              <>
+                {hourly.map((x, idx) => {
+                  return (
+                    <>
+                      <Hourly value={x} key={idx} />
+                    </>
+                  );
+                })}
+              </>
+            ) : (
+              <div className="loading-cnt">
+                <div className="loading">loading....</div>
+              </div>
+            )}
+          </div>
+          <div className="weekly-cnt">
+            <div className="weekly">
+              <div className="day">DAY</div>
+              <div className="temp-am">temp-am</div>
+              <div className="temp-pm">temp-pm</div>
+              <div className="sunrise">sunrise</div>
+              <div className="sunset">sunset</div>
+              <div className="humidity">humidity</div>
             </div>
-          )}
-          
+            {weekly ? (
+              <>
+                {weekly
+                  .filter((value, idx) => idx < 3)
+                  .map((i, idx) => {
+                    return <Daily item={i} key={idx} />;
+                  })}
+              </>
+            ) : (
+              <div className="loading-cnt">
+                <div className="loading">loadin...</div>
+              </div>
+            )}
+          </div>
         </>
       ) : (
         <div className="loading-cnt">

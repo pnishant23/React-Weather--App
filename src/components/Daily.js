@@ -4,19 +4,25 @@ import { Link } from 'react-router-dom';
 import SevenDays from './SevenDays';
 
 export default function Daily({ daily }) {
-  function seven() {
-    daily.map((x) => {
-      return <SevenDays s={x} />;
-    });
-  }
   return (
     <>
       {daily ? (
         <>
-          {}
+          <div className="day">day</div>
+          <div className="temp-am">{daily.temp.max}</div>
+          <div className="temp-pm">{daily.temp.min}</div>
+          <div className="sunrise">{daily.sunrise}</div>
+          <div className="sunset">{daily.sunset}</div>
+          <div className="humidity">
+            {daily.weather.map((x) => {
+              return x.main;
+            })}
+          </div>
         </>
       ) : (
-        <div>D loading....</div>
+        <div className="loading-cnt">
+          <div className="loading">loading....</div>
+        </div>
       )}
     </>
   );

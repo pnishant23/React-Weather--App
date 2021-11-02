@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
-import { LinK } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CurrentApi from './API/CurrentApi';
 import Daily from './Daily';
 import Hourly from './Hourly';
@@ -49,7 +49,6 @@ export default function Current() {
   map();*/
 
   //console.log(weekly);
-
   return (
     <>
       {currData ? (
@@ -114,8 +113,25 @@ export default function Current() {
               <div className="sunset">sunset</div>
               <div className="humidity">humidity</div>
             </div>
-            {}
-            <LinK to="sevendays">7 days</LinK>
+            {weekly ? (
+              <>
+                {weekly
+                  .filter((x, idx) => x < 3)
+                  .map((x) => {
+                    return <Daily daily={x} />;
+                  })}
+              </>
+            ) : (
+              <div
+                className="loading
+                -cnt"
+              >
+                <div className="loading">loading....</div>
+              </div>
+            )}
+            <div className="seven-day">
+              <Link to="sevendays">7 days</Link>
+            </div>
           </div>
         </>
       ) : (

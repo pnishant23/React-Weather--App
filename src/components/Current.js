@@ -1,9 +1,21 @@
 import axios from 'axios';
+import moment from 'moment';
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Daily from './Daily';
 import Hourly from './Hourly';
 import Navbar from './Navbar';
+import { FaTemperatureHigh, FaWind } from 'react-icons/fa';
+import { FaTemperatureLow } from 'react-icons/fa';
+import { FiSunrise } from 'react-icons/fi';
+import { FiSunset } from 'react-icons/fi';
+import { TiWeatherWindyCloudy } from 'react-icons/ti';
+import { WiHumidity } from 'react-icons/wi';
+import { FaWind } from 'react-icons/fa';
+import { FaRadiationAlt } from 'react-icons/fa';
+import { MdVisibility } from 'react-icons/md';
+import { BsFillCloudsFill } from 'react-icons/bs';
+import { GiDew } from 'react-icons/gi';
 
 export default function Current() {
   const [currData, setCurrData] = useState(true);
@@ -52,7 +64,7 @@ export default function Current() {
       });
   }, [latitude, longitude]);
 
-  console.log(city)
+  console.log(city);
 
   //console.log(currData);
   //console.log(hourly);
@@ -70,42 +82,97 @@ export default function Current() {
     <>
       {currData.weather ? (
         <>
-          <h1>{city[1].name}</h1>
+          <h1>{city ? <>{city[1].name}</> : <>----------</>}</h1>
 
           <Navbar />
           <div className="container">
             <div className="weather">
-              <div className="temp">{currData.temp}°C</div>
+              <div className="temp">
+                {currData.temp}°C
+                {currData.weather.map((x) => {
+                  return <span>{x.main}</span>;
+                })}
+              </div>
               <div className="icon">
                 {currData.weather.map((x) => {
                   return (
-                    <img
-                      src={`http://openweathermap.org/img/wn/${x.icon}.png`}
-                    />
+                    <>
+                      <img
+                        src={`http://openweathermap.org/img/wn/${x.icon}.png`}
+                      />
+                    </>
                   );
                 })}
               </div>
             </div>
             <div className="info-cnt" ref={info_cnt}>
               <div className="info">
-                <div className="icon">icon</div>
-                <div className="value">{/*currData.humidity*/}</div>
+                <div className="icon">
+                  {/* sunrise */}
+                  <FiSunrise />
+                </div>
+                <div className="value" id="sunrise">
+                  {moment(currData.sunrise * 1000).format('HH:mm a')}
+                </div>
               </div>
               <div className="info">
-                <div className="icon">icon</div>
-                <div className="value">{/*currData.pressure*/}</div>
+                <div className="icon">
+                  {/* humidity */}
+                  <WiHumidity />
+                </div>
+                <div className="value">{currData.humidity}%</div>
               </div>
               <div className="info">
-                <div className="icon">icon</div>
-                <div className="value">{/*currData.visibility*/}m</div>
+                <div className="icon">
+                  {/* sunset */}
+                  <FiSunset />
+                </div>
+                <div className="value" >
+                  {moment(currData.sunset * 1000).format('HH:mm a')}
+                </div>
               </div>
               <div className="info">
-                <div className="icon">icon</div>
-                <div className="value">{/*currData.uvi*/}</div>
+                <div className="icon">
+                  {/* uvi */}
+                  <FaRadiationAlt />
+                </div>
+                <div className="value">{currData.uvi}</div>
               </div>
               <div className="info">
-                <div className="icon">icon</div>
-                <div className="value">{}</div>
+                <div className="icon">
+                  {/* wind_speed */}
+                  <FaWind />
+                </div>
+                <div className="value">{currData.wind_speed}</div>
+              </div>
+              <div className="info">
+                <div className="icon">
+                  {/* visibility */}
+                  <MdVisibility />
+                </div>
+                <div className="value">{currData.visibility}</div>
+              </div>
+              <div className="info">
+                <div className="icon">
+                  {/* feels like */}
+                  <FaTemperatureHigh />
+                  feels like
+                </div>
+                <div className="value">{currData.feels_like}°C</div>
+              </div>
+              <div className="info">
+                <div className="icon">
+                  {/* clouds */}
+                  <BsFillCloudsFill />
+                </div>
+                <div className="value">{currData.clouds}%</div>
+              </div>
+              <div className="info">
+                <div className="icon">
+                  {/* dew point */}
+                  <GiDew />
+                </div>
+                <div className="value">{currData.dew_point}°C</div>
               </div>
             </div>
           </div>
@@ -129,11 +196,21 @@ export default function Current() {
           <div className="weekly-cnt">
             <div className="weekly">
               <div className="day">DAY</div>
-              <div className="temp-am">temp-am</div>
-              <div className="temp-pm">temp-pm</div>
-              <div className="sunrise">sunrise</div>
-              <div className="sunset">sunset</div>
-              <div className="humidity">humidity</div>
+              <div className="temp-am">
+                <FaTemperatureHigh />
+              </div>
+              <div className="temp-pm">
+                <FaTemperatureLow />
+              </div>
+              <div className="sunrise">
+                <FiSunrise />
+              </div>
+              <div className="sunset">
+                <FiSunset />
+              </div>
+              <div className="humidity">
+                <TiWeatherWindyCloudy />
+              </div>
             </div>
             {weekly ? (
               <>

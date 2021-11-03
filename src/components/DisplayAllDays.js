@@ -1,15 +1,22 @@
 import React from 'react';
+import moment from 'moment';
 
-export default function DisplayAllDays(value) {
+export default function DisplayAllDays({ value }) {
   console.log(value);
   return (
     <>
       {value ? (
         <div className="day">
-          <div id="temp">{value.pressure}</div>
-          <div className="icon">icon</div>
-          <div>day</div>
-          <div>23/03</div>
+          <div id="temp">{value.temp.day}°C</div>
+          <div className="icon">
+            {value.weather.map((x) => {
+              return (
+                <img src={`http://openweathermap.org/img/wn/${x.icon}.png`} />
+              );
+            })}
+          </div>
+          <div>{moment(value.dt * 1000).format('ddd')}</div>
+          <div>{moment(value.dt * 1000).format('DD/MM')}</div>
           <div>
             {value.weather.map((x) => {
               return x.main;

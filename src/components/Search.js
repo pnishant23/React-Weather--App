@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import axios from 'axios';
+import moment from 'moment';
 
 export default function Search() {
   const [cityName, setCityName] = useState();
@@ -24,7 +25,7 @@ export default function Search() {
     setCityName(e.target.value);
   }
 
-  console.log(data);
+  //console.log(data);
   return (
     <>
       <Navbar />
@@ -50,7 +51,15 @@ export default function Search() {
             </header>
 
             <div className="ti">
-              <div id="temp">{data.main.temp}</div>
+              <div id="temp">
+                {data.main.temp}
+                °C
+                <h4>
+                  {data.weather.map((x) => {
+                    return x.main;
+                  })}
+                </h4>
+              </div>
               <div id="icon">
                 {data.weather.map((x) => {
                   return (
@@ -63,16 +72,15 @@ export default function Search() {
             </div>
 
             <div id="para">
-              <p>humidity: {data.main.humidity}</p>
+              <p>humidity: {data.main.humidity}%</p>
               <p>pressure: {data.main.pressure}hpa</p>
-              <p>wind speed: {data.wind.speed}</p>
-              <p>visibility: {data.main.visibility}</p>
-              <p>: 60hpa</p>
+              <p>wind speed: {data.wind.speed}m/s</p>
+              <p>visibility: {data.visibility} m</p>
             </div>
           </div>
         ) : (
           <div className="loadin-cnt">
-            <div className="loading">loading....</div>
+            <div className="loading">Search City to view Data</div>
           </div>
         )}
       </div>

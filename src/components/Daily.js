@@ -1,29 +1,30 @@
+import moment from 'moment';
 import React from 'react';
-import ThreeDays from './ThreeDays';
-import { Link } from 'react-router-dom';
-import SevenDays from './SevenDays';
 
 export default function Daily({ daily }) {
   return (
     <>
-      {daily ? (
-        <>
-          <div className="day">day</div>
-          <div className="temp-am">{daily.temp.max}</div>
-          <div className="temp-pm">{daily.temp.min}</div>
-          <div className="sunrise">{daily.sunrise}</div>
-          <div className="sunset">{daily.sunset}</div>
-          <div className="humidity">
-            {daily.weather.map((x) => {
-              return x.main;
-            })}
-          </div>
-        </>
-      ) : (
-        <div className="loading-cnt">
-          <div className="loading">loading....</div>
+      <div className="weekly">
+        <div className="day">{moment(daily.dt * 1000).format('ddd')}</div>
+        <div className="temp-am">{daily.temp.max}°C</div>
+        <div className="temp-pm">{daily.temp.min}°C</div>
+        <div className="sunrise">
+          {moment(daily.sunrise * 1000).format('HH:mm a')}am
         </div>
-      )}
+        <div className="sunset">
+          {moment(daily.sunset * 1000).format('HH:mm a')}am
+        </div>
+        <div className="humidity">
+          {daily.weather.map((x) => {
+            return (
+              <img
+                src={`http://openweathermap.org/img/wn/${x.icon}.png`}
+                alt="icon"
+              />
+            );
+          })}
+        </div>
+      </div>
     </>
   );
 }

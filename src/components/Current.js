@@ -1,11 +1,9 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import CurrentApi from './API/CurrentApi';
 import Daily from './Daily';
 import Hourly from './Hourly';
 import Navbar from './Navbar';
-import SevenDays from './SevenDays';
 
 export default function Current() {
   const [currData, setCurrData] = useState(true);
@@ -49,23 +47,25 @@ export default function Current() {
   map();*/
 
   //console.log(weekly);
+
   return (
     <>
-      {currData ? (
+      {currData.weather ? (
         <>
           <h1>Mumbai</h1>
 
           <Navbar />
           <div className="container">
             <div className="weather">
-              <div className="temp">{/*currData.temp*/}</div>
+              <div className="temp">{currData.temp}°C</div>
               <div className="icon">
-                <img
-                  src={
-                    './weather-icon-set/CLOUS/png clous/001lighticons-05.png'
-                  }
-                  alt="icon"
-                />
+                {currData.weather.map((x) => {
+                  return (
+                    <img
+                      src={`http://openweathermap.org/img/wn/${x.icon}.png`}
+                    />
+                  );
+                })}
               </div>
             </div>
             <div className="info-cnt" ref={info_cnt}>
@@ -85,6 +85,10 @@ export default function Current() {
                 <div className="icon">icon</div>
                 <div className="value">{/*currData.uvi*/}</div>
               </div>
+              <div className="info">
+                <div className="icon">icon</div>
+                <div className="value">{}</div>
+              </div>
             </div>
           </div>
           <div className="hourly-cnt">
@@ -93,7 +97,7 @@ export default function Current() {
                 {hourly.map((x, idx) => {
                   return (
                     <>
-                      <Hourly value={x} key={idx} />
+                      <Hourly value={x} key={x.dt} />
                     </>
                   );
                 })}
@@ -115,11 +119,9 @@ export default function Current() {
             </div>
             {weekly ? (
               <>
-                {weekly
-                  .filter((x, idx) => x < 3)
-                  .map((x) => {
-                    return <Daily daily={x} />;
-                  })}
+                {weekly.slice(0, 3).map((x) => {
+                  return <Daily daily={x} />;
+                })}
               </>
             ) : (
               <div

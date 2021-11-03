@@ -13,11 +13,15 @@ export default function Current() {
   const info_cnt = useRef(null);
   const [hourly, setHourly] = useState();
   const [weekly, setWeekly] = useState();
+  const [city, setCity] = useState();
 
   const API_KEY = '9fea503e8177fd247f33fbb6357119d3';
 
   const url = `        https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&units=metric&appid=${API_KEY}`;
 
+  const cityUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=8&appid=${API_KEY}`;
+
+  //fetching weather data
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((x) => {
       setLongitude(x.coords.longitude);
@@ -36,6 +40,20 @@ export default function Current() {
       });
   }, [latitude, longitude]);
 
+  //fetching city name fromm coordinates
+  useEffect(() => {
+    axios
+      .get(cityUrl)
+      .then((res) => {
+        setCity(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [latitude, longitude]);
+
+  console.log(city)
+
   //console.log(currData);
   //console.log(hourly);
 
@@ -52,7 +70,7 @@ export default function Current() {
     <>
       {currData.weather ? (
         <>
-          <h1>Mumbai</h1>
+          <h1>{city[1].name}</h1>
 
           <Navbar />
           <div className="container">

@@ -188,7 +188,7 @@ body {
 }
 
 #temp {
-  font-size: 0px;
+  font-size: 20px;
 }
 
 .day img {
@@ -269,8 +269,9 @@ body {
         font-size:2.5rem;*/
 }
 
-.result #icon {
-  font-size: 6rem;
+.result #icon img {
+  width: 120px;
+  height: ;
 }
 
 .result #para {

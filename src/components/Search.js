@@ -80,7 +80,7 @@ export default function Search() {
           </div>
         ) : (
           <div className="loadin-cnt">
-            <div className="loading">Search City to view Data</div>
+            <div className="loadin">Search City to view Data</div>
           </div>
         )}
       </div>

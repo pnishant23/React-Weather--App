@@ -127,6 +127,8 @@ body {
 .hourly {
   padding: 0.6rem;
   margin: 0.3rem;
+  transition: transform 0.2s;
+  border-radius: 2p;
 }
 
 .hourly:first-child {
@@ -144,6 +146,11 @@ body {
   padding: 0.4rem;
   height: max-content;
   width: 100%;
+}
+
+.hourly:hover {
+  transform: scale(1.1);
+  box-shadow: 2px 2px 2px 2px hsl(0, 0%, 40%);
 }
 
 .weekly {
@@ -271,7 +278,7 @@ body {
 
 .result #icon img {
   width: 120px;
-  height: ;
+  /*height: ;*/
 }
 
 .result #para {

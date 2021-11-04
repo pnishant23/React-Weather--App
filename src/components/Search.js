@@ -52,7 +52,7 @@ export default function Search() {
 
             <div className="ti">
               <div id="temp">
-                {data.main.temp}
+                {data.main.temp.toFixed(0)}
                 °C
                 <h4>
                   {data.weather.map((x) => {
@@ -73,9 +73,9 @@ export default function Search() {
 
             <div id="para">
               <p>humidity: {data.main.humidity}%</p>
-              <p>pressure: {data.main.pressure}hpa</p>
-              <p>wind speed: {data.wind.speed}m/s</p>
-              <p>visibility: {data.visibility} m</p>
+              <p>pressure: {data.main.pressure} hpa</p>
+              <p>wind speed: {data.wind.speed.toFixed(0)} m/s</p>
+              <p>visibility: {data.visibility / 1000} km</p>
             </div>
           </div>
         ) : (

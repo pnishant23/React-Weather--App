@@ -7,7 +7,7 @@ export default function DisplayAllDays({ value }) {
     <>
       {value ? (
         <div className="day">
-          <div id="temp">{value.temp.day}°C</div>
+          <div id="temp">{(value.temp.day).toFixed(0)}°C</div>
           <div className="icon">
             {value.weather.map((x) => {
               return (

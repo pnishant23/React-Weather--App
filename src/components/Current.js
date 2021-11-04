@@ -16,6 +16,7 @@ import { FaRadiationAlt } from 'react-icons/fa';
 import { MdVisibility } from 'react-icons/md';
 import { BsFillCloudsFill } from 'react-icons/bs';
 import { GiDew } from 'react-icons/gi';
+import uuid from 'react-uuid';
 
 export default function Current() {
   const [currData, setCurrData] = useState(true);
@@ -64,7 +65,7 @@ export default function Current() {
       });
   }, [latitude, longitude]);
 
-  console.log(city);
+  //console.log(city);
 
   //console.log(currData);
   //console.log(hourly);
@@ -88,9 +89,9 @@ export default function Current() {
           <div className="container">
             <div className="weather">
               <div className="temp">
-                {currData.temp}°C
+                {currData.temp.toFixed(1)}°C
                 {currData.weather.map((x) => {
-                  return <span>{x.main}</span>;
+                  return <span key={uuid()}>{x.main}</span>;
                 })}
               </div>
               <div className="icon">
@@ -99,6 +100,7 @@ export default function Current() {
                     <>
                       <img
                         src={`http://openweathermap.org/img/wn/${x.icon}.png`}
+                        key={uuid()}
                       />
                     </>
                   );
@@ -127,7 +129,7 @@ export default function Current() {
                   {/* sunset */}
                   <FiSunset />
                 </div>
-                <div className="value" >
+                <div className="value">
                   {moment(currData.sunset * 1000).format('HH:mm a')}
                 </div>
               </div>
@@ -150,7 +152,7 @@ export default function Current() {
                   {/* visibility */}
                   <MdVisibility />
                 </div>
-                <div className="value">{currData.visibility}</div>
+                <div className="value">{currData.visibility / 1000}km</div>
               </div>
               <div className="info">
                 <div className="icon">
@@ -182,7 +184,7 @@ export default function Current() {
                 {hourly.map((x, idx) => {
                   return (
                     <>
-                      <Hourly value={x} key={x.dt} />
+                      <Hourly value={x} key={uuid()} />
                     </>
                   );
                 })}
@@ -195,7 +197,7 @@ export default function Current() {
           </div>
           <div className="weekly-cnt">
             <div className="weekly">
-              <div className="day">DAY</div>
+              <div className="day"></div>
               <div className="temp-am">
                 <FaTemperatureHigh />
               </div>
@@ -215,7 +217,7 @@ export default function Current() {
             {weekly ? (
               <>
                 {weekly.slice(0, 3).map((x) => {
-                  return <Daily daily={x} />;
+                  return <Daily daily={x} key={uuid()} />;
                 })}
               </>
             ) : (

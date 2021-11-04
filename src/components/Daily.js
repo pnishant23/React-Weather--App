@@ -6,8 +6,8 @@ export default function Daily({ daily }) {
     <>
       <div className="weekly">
         <div className="day">{moment(daily.dt * 1000).format('ddd')}</div>
-        <div className="temp-am">{daily.temp.max}°C</div>
-        <div className="temp-pm">{daily.temp.min}°C</div>
+        <div className="temp-am">{daily.temp.max.toFixed(0)}°C</div>
+        <div className="temp-pm">{daily.temp.min.toFixed(0)}°C</div>
         <div className="sunrise">
           {moment(daily.sunrise * 1000).format('HH:mm a')}am
         </div>
@@ -20,6 +20,7 @@ export default function Daily({ daily }) {
               <img
                 src={`http://openweathermap.org/img/wn/${x.icon}.png`}
                 alt="icon"
+                key={new Date().getTime()}
               />
             );
           })}

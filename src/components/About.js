@@ -17,7 +17,7 @@ export default function About() {
         </p>
         <p>Source code is available on github </p>
         <div className="social">
-          <a href="https://github.com/pnishant2">
+          <a href="https://github.com/pnishant23/React-Weather--App">
             <FaGithubSquare />
           </a>
         </div>

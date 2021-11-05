@@ -135,7 +135,8 @@ body {
   padding: 0.6rem;
   margin: 0.3rem;
   transition: transform 0.2s;
-  border-radius: 2p;
+  border-radius: 2px;
+  font
 }
 
 .hourly:first-child {
@@ -154,6 +155,7 @@ body {
   height: max-content;
   width: 100%;
   margin-bottom: 70px;
+  text-align: center;
 }
 
 .hourly:hover {
@@ -184,6 +186,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-top: 60px;
   margin-bottom: 60px;
 }
 

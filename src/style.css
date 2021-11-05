@@ -136,7 +136,7 @@ body {
   margin: 0.3rem;
   transition: transform 0.2s;
   border-radius: 2px;
-  font
+  font-size: 1rem;
 }
 
 .hourly:first-child {
@@ -374,6 +374,11 @@ a {
   .weekly .sunrise,
   .weekly .sunset {
     display: none;
+  }
+
+  .container-seven {
+    margin-top: 10px;
+    mar
   }
 }
 

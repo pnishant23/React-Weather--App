@@ -17,7 +17,7 @@ export default function About() {
         </p>
         <p>Source code is available on github </p>
         <div className="social">
-          <a href="">
+          <a href="https://github.com/pnishant2">
             <FaGithubSquare />
           </a>
         </div>

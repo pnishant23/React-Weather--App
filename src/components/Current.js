@@ -27,7 +27,6 @@ export default function Current() {
   const [hourly, setHourly] = useState();
   const [weekly, setWeekly] = useState();
   const [city, setCity] = useState();
-
   const API_KEY = '9fea503e8177fd247f33fbb6357119d3';
 
   const url = `        https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&units=metric&appid=${API_KEY}`;
@@ -79,11 +78,53 @@ export default function Current() {
 
   //console.log(weekly);
 
+  const day = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+  const month = [
+    'jan',
+    'feb',
+    'mar',
+    'apr',
+    'may',
+    'jun',
+    'jul',
+    'aug',
+    'sep',
+    'oct',
+    'nov',
+    'dec',
+  ];
+
+  const [Day, setDay] = useState();
+  const [date, setDate] = useState();
+  const [Month, setM] = useState();
+
+  useEffect(() => {
+    const dateObj = new Date();
+    const DAY = dateObj.getDay();
+    const date = dateObj.getDate();
+    const MONTH = dateObj.getMonth();
+    setDay(day[DAY]);
+    setDate(date);
+    setMonth(month[MONTH]);
+  }, []);
+
   return (
     <>
       {currData.weather ? (
         <>
-          <h1>{city ? <>{city[1].name}</> : <>----------</>}</h1>
+          <h1>
+            {city ? (
+              <>
+                {city[1].name},
+                <span id="date">
+                  {Day},{date},{Month}
+                </span>
+              </>
+            ) : (
+              <>----------</>
+            )}
+          </h1>
 
           <Navbar />
           <div className="container">

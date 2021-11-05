@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { FaGithubSquare } from 'react-icons/fa';
 
 export default function About() {
   return (
@@ -15,8 +16,10 @@ export default function About() {
           youtube, google, etc
         </p>
         <p>Source code is available on github </p>
-        <div className='social'>
-          <Link></Link>
+        <div className="social">
+          <a href="">
+            <FaGithubSquare />
+          </a>
         </div>
       </div>
       <Navbar />

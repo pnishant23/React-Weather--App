@@ -97,7 +97,7 @@ export default function Current() {
 
   const [Day, setDay] = useState();
   const [date, setDate] = useState();
-  const [Month, setM] = useState();
+  const [Month, setMonth] = useState();
 
   useEffect(() => {
     const dateObj = new Date();
@@ -116,9 +116,9 @@ export default function Current() {
           <h1>
             {city ? (
               <>
-                {city[1].name},
+                {city[1].name}
                 <span id="date">
-                  {Day},{date},{Month}
+                  {Day} {date} {Month}
                 </span>
               </>
             ) : (
@@ -270,7 +270,7 @@ export default function Current() {
               </div>
             )}
             <div className="seven-day">
-              <Link to="sevendays">7 days</Link>
+              <Link to="sevendays"> See 7 days Forecast</Link>
             </div>
           </div>
         </>

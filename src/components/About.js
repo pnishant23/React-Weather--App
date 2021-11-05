@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar';
+import { Link } from 'react-router-dom'
 
 export default function About() {
   return (
@@ -14,7 +15,9 @@ export default function About() {
           youtube, google, etc
         </p>
         <p>Source code is available on github </p>
-        <div></div>
+        <div className='social'>
+          <Link></Link>
+        </div>
       </div>
       <Navbar />
     </>
